@@ -7,15 +7,18 @@ function switchTab(tabId) {
 
 function saveProject() {
   const data = {
-    scripts: document.getElementById('scripts').innerHTML,
-    dialogue: document.getElementById('dialogue').innerHTML,
-    objects: document.getElementById('objects').innerHTML
+    story: document.getElementById('story').innerHTML,
+    settings: document.getElementById('settings').innerHTML,
+    controls: document.getElementById('controls').innerHTML,
+    features: document.getElementById('features').innerHTML,
+    locations: document.getElementById('locations').innerHTML,
+    npcs: document.getElementById('npcs').innerHTML
   };
 
   const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'project.json';
+  a.download = 'game_project.json';
   a.click();
 }
 
@@ -27,13 +30,22 @@ function loadProject(event) {
   reader.onload = function (e) {
     try {
       const data = JSON.parse(e.target.result);
-      if (data.scripts) document.getElementById('scripts').innerHTML = data.scripts;
-      if (data.dialogue) document.getElementById('dialogue').innerHTML = data.dialogue;
-      if (data.objects) document.getElementById('objects').innerHTML = data.objects;
+      if (data.story) document.getElementById('story').innerHTML = data.story;
+      if (data.settings) document.getElementById('settings').innerHTML = data.settings;
+      if (data.controls) document.getElementById('controls').innerHTML = data.controls;
+      if (data.features) document.getElementById('features').innerHTML = data.features;
+      if (data.locations) document.getElementById('locations').innerHTML = data.locations;
+      if (data.npcs) document.getElementById('npcs').innerHTML = data.npcs;
       alert("Project loaded successfully!");
     } catch (err) {
       alert("Failed to load project: " + err.message);
     }
   };
   reader.readAsText(file);
+}
+
+function clearAll() {
+  ['story', 'settings', 'controls', 'features', 'locations', 'npcs'].forEach(id => {
+    document.getElementById(id).innerHTML = '';
+  });
 }
