@@ -6,18 +6,20 @@ function switchTab(tabId) {
 }
 
 function saveProject() {
-  const tabIds = ['story', 'settings', 'controls', 'features', 'locations', 'npcs'];
+  const tabIds = ['story', 'settings', 'controls', 'features', 'locations', 'npcs', 'music', 'systems'];
   const data = {};
 
   tabIds.forEach(id => {
-    const content = document.getElementById(id).innerHTML;
-    data[id] = content;
+    data[id] = document.getElementById(id).innerHTML;
   });
+
+  const projectName = document.getElementById('projectName').value.trim() || 'game-design-project';
+  const safeName = projectName.replace(/[^a-z0-9-_]/gi, '_').toLowerCase();
 
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'game-design-project.json';
+  a.download = `${safeName}.json`;
   a.click();
 }
 
@@ -42,7 +44,7 @@ function loadProject(event) {
 }
 
 function clearAll() {
-  const tabIds = ['story', 'settings', 'controls', 'features', 'locations', 'npcs'];
+  const tabIds = ['story', 'settings', 'controls', 'features', 'locations', 'npcs', 'music', 'systems'];
   tabIds.forEach(id => {
     document.getElementById(id).innerHTML = '';
   });
