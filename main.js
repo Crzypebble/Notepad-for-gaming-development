@@ -6,19 +6,18 @@ function switchTab(tabId) {
 }
 
 function saveProject() {
-  const data = {
-    story: document.getElementById('story').innerHTML,
-    settings: document.getElementById('settings').innerHTML,
-    controls: document.getElementById('controls').innerHTML,
-    features: document.getElementById('features').innerHTML,
-    locations: document.getElementById('locations').innerHTML,
-    npcs: document.getElementById('npcs').innerHTML
-  };
+  const tabIds = ['story', 'settings', 'controls', 'features', 'locations', 'npcs'];
+  const data = {};
 
-  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+  tabIds.forEach(id => {
+    const content = document.getElementById(id).innerHTML;
+    data[id] = content;
+  });
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'game_project.json';
+  a.download = 'game-design-project.json';
   a.click();
 }
 
@@ -30,12 +29,10 @@ function loadProject(event) {
   reader.onload = function (e) {
     try {
       const data = JSON.parse(e.target.result);
-      if (data.story) document.getElementById('story').innerHTML = data.story;
-      if (data.settings) document.getElementById('settings').innerHTML = data.settings;
-      if (data.controls) document.getElementById('controls').innerHTML = data.controls;
-      if (data.features) document.getElementById('features').innerHTML = data.features;
-      if (data.locations) document.getElementById('locations').innerHTML = data.locations;
-      if (data.npcs) document.getElementById('npcs').innerHTML = data.npcs;
+      for (const [id, content] of Object.entries(data)) {
+        const section = document.getElementById(id);
+        if (section) section.innerHTML = content;
+      }
       alert("Project loaded successfully!");
     } catch (err) {
       alert("Failed to load project: " + err.message);
@@ -45,7 +42,8 @@ function loadProject(event) {
 }
 
 function clearAll() {
-  ['story', 'settings', 'controls', 'features', 'locations', 'npcs'].forEach(id => {
+  const tabIds = ['story', 'settings', 'controls', 'features', 'locations', 'npcs'];
+  tabIds.forEach(id => {
     document.getElementById(id).innerHTML = '';
   });
 }
