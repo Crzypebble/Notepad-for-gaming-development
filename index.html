@@ -9,6 +9,11 @@
 <body>
   <h1>Game Design Notepad</h1>
 
+  <!-- Project Name Input -->
+  <label for="projectName">Project Name:</label>
+  <input type="text" id="projectName" placeholder="Enter project name..." />
+
+  <!-- Tabs -->
   <div class="tabs">
     <button onclick="switchTab('story')">Story</button>
     <button onclick="switchTab('settings')">Settings</button>
@@ -16,15 +21,21 @@
     <button onclick="switchTab('features')">Features</button>
     <button onclick="switchTab('locations')">Locations</button>
     <button onclick="switchTab('npcs')">NPCs</button>
+    <button onclick="switchTab('music')">Game Music</button>
+    <button onclick="switchTab('systems')">Script/System Plans</button>
   </div>
 
+  <!-- Tab Content Areas -->
   <div class="tab-content" id="story" contenteditable="true">Write the game’s story...</div>
   <div class="tab-content" id="settings" contenteditable="true" style="display:none;">Game world settings...</div>
   <div class="tab-content" id="controls" contenteditable="true" style="display:none;">Game controls...</div>
   <div class="tab-content" id="features" contenteditable="true" style="display:none;">Game features...</div>
   <div class="tab-content" id="locations" contenteditable="true" style="display:none;">Game locations...</div>
   <div class="tab-content" id="npcs" contenteditable="true" style="display:none;">NPC descriptions...</div>
+  <div class="tab-content" id="music" contenteditable="true" style="display:none;">Game music ideas...</div>
+  <div class="tab-content" id="systems" contenteditable="true" style="display:none;">Script or system plans...</div>
 
+  <!-- Controls -->
   <div class="controls">
     <button onclick="saveProject()">Save All</button>
     <input type="file" id="loadInput" onchange="loadProject(event)" style="display:none" />
