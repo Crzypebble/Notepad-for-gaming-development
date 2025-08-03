@@ -5,6 +5,13 @@ body {
   color: #f1f1f1;
 }
 
+input#projectName {
+  padding: 8px;
+  font-size: 1em;
+  margin-bottom: 10px;
+  width: 250px;
+}
+
 .tabs button {
   margin-right: 10px;
   padding: 10px 20px;
