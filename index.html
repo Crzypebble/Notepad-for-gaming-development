@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Editor</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>My Project Editor</h1>
+
+  <!-- Tab structure -->
+  <div class="tabs">
+    <button onclick="switchTab('scripts')">Scripts</button>
+    <button onclick="switchTab('dialogue')">Dialogue</button>
+    <button onclick="switchTab('objects')">Objects</button>
+  </div>
+
+  <!-- Content areas -->
+  <div class="tab-content" id="scripts" contenteditable="true">Write your scripts here...</div>
+  <div class="tab-content" id="dialogue" contenteditable="true" style="display:none;">Write your dialogue here...</div>
+  <div class="tab-content" id="objects" contenteditable="true" style="display:none;">Write your objects here...</div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button onclick="saveProject()">💾 Save</button>
+    <input type="file" id="loadInput" onchange="loadProject(event)" style="display:none" />
+    <button onclick="document.getElementById('loadInput').click()">📂 Load</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
